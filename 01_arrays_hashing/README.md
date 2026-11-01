@@ -25,13 +25,13 @@ Trade O(n) space for O(1) average lookups: use a hash set for "have I seen this?
 | 2 | [Valid Anagram](https://neetcode.io/problems/is-anagram) | Easy | 26-slot count array, early exit | O(n) | O(1) | ✅ Accepted 2026-11-01 | 2026-11-08 |
 | 3 | [Two Sum](https://neetcode.io/problems/two-integer-sum) | Easy | Single-pass value→index map, check then insert | O(n) | O(n) | ✅ Accepted 2026-11-01 | 2026-11-08 |
 | 4 | [Group Anagrams](https://neetcode.io/problems/anagram-groups) | Medium | `defaultdict(list)` keyed by 26-count signature | O(n·k) | O(n·k) | ✅ Accepted 2026-11-01 | 2026-11-08 |
-| 5 | [Top K Frequent Elements](https://neetcode.io/problems/top-k-elements-in-list) | Medium | | | | ⏳ Next | |
-| 6 | [Encode and Decode Strings](https://neetcode.io/problems/string-encode-and-decode) | Medium | | | | | |
+| 5 | [Top K Frequent Elements](https://neetcode.io/problems/top-k-elements-in-list) | Medium | Bucket sort by frequency | O(n) | O(n) | ✅ Accepted 2026-11-01 | 2026-11-08 |
+| 6 | [Encode and Decode Strings](https://neetcode.io/problems/string-encode-and-decode) | Medium | | | | ⏳ Next | |
 | 7 | [Product of Array Except Self](https://neetcode.io/problems/products-of-array-discluding-self) | Medium | | | | | |
 | 8 | [Valid Sudoku](https://neetcode.io/problems/valid-sudoku) | Medium | | | | | |
 | 9 | [Longest Consecutive Sequence](https://neetcode.io/problems/longest-consecutive-sequence) | Medium | | | | | |
 
-**Module progress:** 4 / 9
+**Module progress:** 5 / 9
 
 ---
 
@@ -114,6 +114,25 @@ Trade O(n) space for O(1) average lookups: use a hash set for "have I seen this?
 - The count key always pays a fixed 26-element conversion, even for 3-letter words.
 - Runtime percentiles are noisy; resubmitting can shift them by 20–30 points.
 
+### 5. Top K Frequent Elements · 2026-11-01 · Grade: A-
+
+**What went well**
+- Explained all three approaches: sort counts (O(m log m)), size-k min-heap (O(n log k)), bucket sort by frequency (O(n)).
+- Knew `heapq` is a min-heap and why a *min*-heap keeps the k largest: evict the smallest in O(log k).
+- Defended an interview choice (bucket sort, since there are no library internals to justify).
+- Avoided the `[[]] * n` aliasing trap; `freq - 1` indexing is valid since 1 ≤ freq ≤ n; stops once k items are collected.
+
+**To improve**
+- Sorting worst case: attributed it to "equal frequencies". It's when all elements are **distinct** (m = n).
+- Heap space: said O(k) but forgot the O(n) Counter. Count every structure.
+- Complexity for bucket sort wasn't stated until asked.
+- Simplify: `bucket[:to_pick]` already clamps, so both `min(...)` calls go; `if bucket` instead of `len(bucket) > 0`; track `len(answer) == k` instead of a separate `to_pick` counter.
+- Comments: `# comment` (PEP 8) and explain *why*, not *what*. In interviews, use `Counter(nums)` unless told not to.
+
+**Interview talking points**
+- Streaming or huge data with small k → size-k heap is O(k) memory; bucket sort needs O(n).
+- Production one-liners: `Counter(nums).most_common(k)` or `heapq.nlargest(k, counts, key=counts.get)`.
+
 ---
 
 ## Module report card
@@ -128,5 +147,7 @@ Trade O(n) space for O(1) average lookups: use a hash set for "have I seen this?
 | Adapting to follow-up constraints | 🟡 Improving |
 | Hashable key design (tuple vs list, collisions) | 🟡 Improving |
 | Python naming (PEP 8) | 🟡 Improving |
+| Heap and bucket-sort reasoning | 🟢 Solid |
+| Complete space accounting | 🟡 Improving |
 
-**Teacher's note:** four accepted solutions in one session, including your first Medium, and you're already applying earlier feedback without being told. Next focus: name things by intent, stress-test any key you build, and state complexity for every approach without being asked.
+**Teacher's note:** five accepted solutions in one session, two of them Medium, and a well-defended choice between three approaches. Next focus: state complexity for every approach unprompted, count every data structure in space, and trim bookkeeping that Python semantics already handle.

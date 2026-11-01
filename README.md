@@ -37,8 +37,9 @@ One folder per pattern, numbered in roadmap order:
 | 2 | [Valid Anagram](https://neetcode.io/problems/is-anagram) | Arrays & Hashing | Easy | O(n) | O(1) | 2026-11-01 | |
 | 3 | [Two Sum](https://neetcode.io/problems/two-integer-sum) | Arrays & Hashing | Easy | O(n) | O(n) | 2026-11-01 | |
 | 4 | [Group Anagrams](https://neetcode.io/problems/anagram-groups) | Arrays & Hashing | Medium | O(n·k) | O(n·k) | 2026-11-01 | |
+| 5 | [Top K Frequent Elements](https://neetcode.io/problems/top-k-elements-in-list) | Arrays & Hashing | Medium | O(n) | O(n) | 2026-11-01 | |
 
-**Solved:** 4 · **Re-solved from memory:** 0 · **Target:** 110–120 solved, 60+ re-solved
+**Solved:** 5 · **Re-solved from memory:** 0 · **Target:** 110–120 solved, 60+ re-solved
 
 ---
 
@@ -72,6 +73,8 @@ _Last updated: 2026-11-01 · Sessions: 1_
 8. **Follow PEP 8 naming.** `snake_case` for functions and variables; name containers by what they hold (`index_of`, `groups`, `counts`), never by their type (`dictionary`, `num_set`).
 9. **Stress-test composite keys.** When joining values into a string key, check for collisions (`[1, 11]` vs `[11, 1]`). Prefer `tuple(...)`: it's hashable, collision-free and cheaper.
 10. **Big-O is growth, not speed.** In CPython, push loops into C-backed built-ins (`sorted`, `join`, `Counter`, `sum`). Mention both the asymptotic and the practical answer in interviews.
+11. **Count every structure in space complexity.** The heap is O(k), but the Counter feeding it is O(n), so the total is O(n).
+12. **Lean on Python semantics to remove bookkeeping.** Slices clamp (`xs[:k]` never overflows), empty containers are falsy, and one source of truth (`len(answer) == k`) beats two counters kept in sync.
 
 **Strengths to keep:** you resist jumping to code, you think about early exit, and you ask clarifying questions when a prompt is ambiguous. That is exactly how interviewers want you to work.
 
@@ -79,4 +82,4 @@ _Last updated: 2026-11-01 · Sessions: 1_
 
 | Date | Session | Highlights |
 |---|---|---|
-| 2026-11-01 | Big-O quiz, built-ins, Contains Duplicate, Valid Anagram, Two Sum, Group Anagrams | Big-O 3/6 (Python costs), built-ins mostly correct. Four problems accepted: Contains Duplicate (A-), Valid Anagram (A), Two Sum (A-), Group Anagrams (A-). Next: Top K Frequent Elements; re-solve all four on 2026-11-08. |
+| 2026-11-01 | Big-O quiz, built-ins, Contains Duplicate, Valid Anagram, Two Sum, Group Anagrams, Top K Frequent | Big-O 3/6 (Python costs), built-ins mostly correct. Five problems accepted: Contains Duplicate (A-), Valid Anagram (A), Two Sum (A-), Group Anagrams (A-), Top K Frequent (A-). First heap and bucket-sort reasoning. Next: Encode and Decode Strings; re-solve all five on 2026-11-08. |
