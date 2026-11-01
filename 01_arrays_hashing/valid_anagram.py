@@ -13,9 +13,12 @@ from typing import List
 
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
+        # REVIEW: interview talking point: for Unicode input, normalise first
+        # (`unicodedata.normalize("NFC", s)`) and use a Counter instead of the array.
         if len(s) != len(t):
             return False
 
+        # REVIEW: PEP 8 wants spaces around operators: `[0] * 26`.
         frequency = [0]*26
 
         for c in s:
@@ -27,6 +30,8 @@ class Solution:
                 return False
             frequency[idx] -= 1
 
+        # REVIEW: unreachable as False. Lengths are equal and no count went
+        # negative, so every count is 0. Delete this loop and `return True`.
         for val in frequency:
             if val != 0:
                 return False

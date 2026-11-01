@@ -12,10 +12,12 @@ from typing import List
 
 class Solution:
     def hasDuplicate(self, nums: List[int]) -> bool:
+        # REVIEW: name containers by intent (`seen`), not type.
         num_set = set()
         for num in nums:
             if num in num_set:
                 return True
+            # REVIEW: `else` after `return` is redundant (Ruff RET505); dedent the add.
             else:
                 num_set.add(num)
         return False

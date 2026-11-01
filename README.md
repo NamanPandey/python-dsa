@@ -10,6 +10,8 @@ Data structures and algorithms practice in Python, following the NeetCode 150 ro
 5. Save the accepted solution here with a docstring: link, approach, time, space, alternatives considered.
 6. Re-solve from memory after 1 week and mark it below.
 
+`# REVIEW:` comments in solution files are coach feedback left in place on purpose. Fix them during the re-solve, not before.
+
 ## Structure
 One folder per pattern, numbered in roadmap order:
 
